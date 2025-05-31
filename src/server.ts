@@ -3,6 +3,7 @@ import express, { type Express } from "express";
 import helmet from "helmet";
 import { pino } from "pino";
 import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 
 import { openAPIRouter } from "@/api-docs/openAPIRouter";
@@ -23,7 +24,22 @@ app.set("trust proxy", true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
-app.use(helmet());
+
+// Configure Helmet with necessary CSP rules
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdn.tailwindcss.com", "unpkg.com"],
+        styleSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdn.tailwindcss.com"],
+        imgSrc: ["'self'", "data:", "blob:"],
+        connectSrc: ["'self'"],
+      },
+    },
+  })
+);
+
 app.use(rateLimiter);
 
 // Request logging
@@ -36,11 +52,15 @@ app.use("/users", userRouter);
 // Swagger UI
 app.use("/api-docs", openAPIRouter);
 
-app.use(express.static(join(__dirname, 'public')));
+// Get the directory name for ES modules
+const currentDir = dirname(fileURLToPath(import.meta.url));
+
+// Serve static files from public directory
+app.use(express.static(join(currentDir, 'public')));
 
 // Root route - serve landing page
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: join(__dirname, 'public') });
+  res.sendFile('index.html', { root: join(currentDir, 'public') });
 });
 
 

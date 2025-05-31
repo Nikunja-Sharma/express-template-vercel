@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backend API Service</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Add Tailwind CSS with configuration -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981'
+                        },
+                        gray: {
+                            400: '#9ca3af',
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Alpine.js after Tailwind -->
+    <!-- <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 </head>
+
 <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-white">
     <div class="container mx-auto px-4 py-16">
         <!-- Hero Section -->
@@ -17,9 +41,10 @@
                 <span class="text-emerald-400">Backend</span>
             </h1>
             <p class="text-xl text-gray-400 mb-8">Powerful, Secure, and Scalable REST API</p>
-            
+
             <!-- Status Badge -->
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 animate-bounce">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 animate-bounce">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2"></span>
                 Server Running
             </div>
@@ -28,19 +53,22 @@
         <!-- API Endpoints -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             <!-- Users API Card -->
-            <div class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
+            <div
+                class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
                 <h3 class="text-xl font-semibold mb-3 text-emerald-400">/api/users</h3>
                 <p class="text-gray-400">User management and authentication endpoints</p>
             </div>
 
             <!-- Health API Card -->
-            <div class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
+            <div
+                class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
                 <h3 class="text-xl font-semibold mb-3 text-emerald-400">/health</h3>
                 <p class="text-gray-400">System health and monitoring endpoints</p>
             </div>
 
             <!-- Clients API Card -->
-            <div class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
+            <div
+                class="p-6 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-all transform hover:-translate-y-1">
                 <h3 class="text-xl font-semibold mb-3 text-emerald-400">/api/clients</h3>
                 <p class="text-gray-400">Client management and data endpoints</p>
             </div>
@@ -65,12 +93,21 @@
 
     <style>
         @keyframes fade-in {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .animate-fade-in {
             animation: fade-in 1s ease-out;
         }
     </style>
 </body>
-</html> 
+
+</html>
