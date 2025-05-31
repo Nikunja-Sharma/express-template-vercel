@@ -59,7 +59,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(join(currentDir, 'public')));
 
 // Root route - serve landing page
-app.get('/', (req, res) => {
+app.get('/', (req: any, res: { sendFile: (arg0: string, arg1: { root: any; }) => void; }) => {
   res.sendFile('index.html', { root: join(currentDir, 'public') });
 });
 
